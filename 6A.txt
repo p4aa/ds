@@ -1,0 +1,21 @@
+//first run this command-
+//pip install mlxtend
+
+import pandas as pd
+from mlxtend.frequent_patterns import apriori, association_rules
+
+# Example Dataset (Transaction Data)
+data = {'bread': [1, 0, 1, 1, 0],
+        'milk': [1, 1, 0, 1, 0],
+        'cheese': [0, 1, 1, 0, 1],
+        'butter': [1, 1, 1, 1, 1]}
+
+df = pd.DataFrame(data)
+
+# Apply Apriori
+frequent_itemsets = apriori(df, min_support=0.6, use_colnames=True)
+
+# Generate association rules
+rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
+print(frequent_itemsets)
+print(rules)
